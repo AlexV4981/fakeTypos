@@ -3,37 +3,28 @@
 # Modified by: Sar Champagne Bielert (CodePath)
 # Modified by: Andrew Burke (CodePath)
 
-# Colors
 RED='\033[0;31m'
 BLUE='\033[0;34m'
 GREEN='\033[0;32m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
 ### Step 1: Start the server
 echo -e "\t[${GREEN}start vulnerable server${NC}]: ${BLUE}hftp${NC}"
 
-node hftp.js > /dev/null 2>&1 &
+hftp &   # start server in background
+
 vulnpid=$!
 
-echo -e "\t[${GREEN}server PID${NC}]: $vulnpid"
-
-### Step 2: Wait for the server to get started
+### Step 2: Wait for server to start
 sleep 2
 
-echo -e "\t[${GREEN}server root directory${NC}]: $(pwd)"
+echo -e "\t[${GREEN}server root directory${NC}]: `pwd`"
 
 ### Step 3: Perform directory traversal attack
 
 ATTACK_PATH="http://localhost:8888/general/reports.txt"
 
-echo -e "\t[${GREEN}starting attack${NC}] on ${BLUE}$ATTACK_PATH${NC}"
+node attack.js $ATTACK_PATH
 
-node attack.js "$ATTACK_PATH"
-
-### Step 4: Clean up the vulnerable server process
-
-echo -e "\t[${RED}stopping server${NC}] (PID: $vulnpid)"
-
+### Step 4: Clean up
 kill -9 $vulnpid
-
-echo -e "\t[${GREEN}done${NC}]"
