@@ -1,7 +1,1 @@
-cd ~
-git clone https://github.com/snort3/libdaq.git
-cd libdaq
-./bootstrap
-./configure
-make
-sudo make install
+https://docs.google.com/document/d/15nKIGqaBMeMZ4j6-TFJM4ILF_zAtGOjqE7gWIRt2bdQ/edit?usp=sharing
