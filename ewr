@@ -1,15 +1,7 @@
-sudo apt update
-sudo apt install -y \
-build-essential \
-cmake \
-git \
-libpcap-dev \
-libpcre3-dev \
-libdnet-dev \
-zlib1g-dev \
-openssl \
-libssl-dev \
-pkg-config \
-luajit \
-libluajit-5.1-dev \
-liblzma-dev
+cd ~
+git clone https://github.com/snort3/libdaq.git
+cd libdaq
+./bootstrap
+./configure
+make
+sudo make install
